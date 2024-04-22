@@ -14,12 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\NewFolder\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\MyMicroservice.Shared\MyMicroservice.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\MyMicroservice.Shared\MyMicroService.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //DI
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 //options patern -- database settings vs
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
