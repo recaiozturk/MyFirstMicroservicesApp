@@ -12,7 +12,8 @@ namespace MyMicroService.Shared.ControllerBases
         {
             return new ObjectResult(response)
             {
-                StatusCode = response.StatusCode
+                StatusCode = response.StatusCode,
+                
             };
         }
     }

@@ -39,7 +39,7 @@ namespace MyMicroService.Services.Catalog.Services
 
         public async Task<Response<CategoryDto>> GetByIdAsync(string id)
         {
-            var category = _categoryColleciton.Find<Category>(c => c.Id == id).FirstOrDefaultAsync();
+            var category = await _categoryColleciton.Find<Category>(c => c.Id == id).FirstOrDefaultAsync();
 
             if (category == null)
                 return Response<CategoryDto>.Fail("Category Not Found", 404);
