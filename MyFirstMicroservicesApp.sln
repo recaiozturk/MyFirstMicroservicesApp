@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1E19B6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroService.Shared", "Shared\MyMicroservice.Shared\MyMicroService.Shared.csproj", "{471529D3-0018-4B46-ACE0-3017D8688A3C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{744D2AC6-C0AB-4FD0-B030-6F6A5A3FA4D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.IdentityServer", "IdentityServer\MyMicroservice.IdentityServer\MyMicroservice.IdentityServer.csproj", "{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,10 @@ Global
 		{471529D3-0018-4B46-ACE0-3017D8688A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{471529D3-0018-4B46-ACE0-3017D8688A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{471529D3-0018-4B46-ACE0-3017D8688A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +48,7 @@ Global
 		{63DF7F6C-C3A4-4D42-9978-9EBD4FC3A4D3} = {99F22889-0E8A-4CB0-96A8-1E6630D3370C}
 		{6CD5BD89-511A-4C98-8902-48F5B43992FC} = {63DF7F6C-C3A4-4D42-9978-9EBD4FC3A4D3}
 		{471529D3-0018-4B46-ACE0-3017D8688A3C} = {1E19B6E7-0293-49A9-ABA2-9B4970C87F27}
+		{F76FEB7C-BA9C-4B25-BE2A-3CFF9FA00CDE} = {744D2AC6-C0AB-4FD0-B030-6F6A5A3FA4D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6D58758-6050-4C4D-8CE9-431C4DD48620}
