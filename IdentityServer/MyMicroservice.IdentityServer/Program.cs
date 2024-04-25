@@ -57,7 +57,17 @@ namespace MyMicroservice.IdentityServer
                     var applicationDbContext=serviceProvider.GetRequiredService<ApplicationDbContext>();
                     applicationDbContext.Database.Migrate();
 
-                    var userManager=serviceProvider.GetRequiredService<UserManager<ApplicationUser>>
+                    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    if(!userManager.Users.Any())
+                    {
+                        userManager.CreateAsync(new ApplicationUser
+                        {
+                            UserName = "rozturk54",
+                            Email = "recaiozturk54@outlook.com",
+                            City = "Kocaeli"
+                        }, "Recai.123").Wait();
+                    }
                 }
 
                 //if (seed)
