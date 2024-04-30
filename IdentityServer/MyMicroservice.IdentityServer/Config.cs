@@ -4,6 +4,7 @@
 
 using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,10 @@ namespace MyMicroservice.IdentityServer
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
                    {
+                       new IdentityResources.Email(),
+                       new IdentityResources.OpenId(),
+                       new IdentityResources.Profile(),
+                       new IdentityResource(){Name="roles",DisplayName="Roles",Description="Kullanıcı Rolleri",UserClaims=new []{"role"}}
                    };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -44,9 +49,19 @@ namespace MyMicroservice.IdentityServer
                     AllowedScopes={ "catalog_fullpermisiion", "photo_stock_fullpermisiion", IdentityServerConstants.LocalApi.ScopeName}
                 },
 
-                // interactive client using code flow + pkce
                 new Client
                 {
+                    ClientName="Asp Net Core MVC",
+                    ClientId="WebMvcClientForUser",
+                    ClientSecrets={new Secret ("secret".Sha256())},
+                    AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes={ IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,
+                     IdentityServerConstants.StandardScopes.Profile,IdentityServerConstants.StandardScopes.OfflineAccess,IdentityServerConstants.LocalApi.ScopeName,"roles"},
+                    AllowOfflineAccess=true,
+                    AccessTokenLifetime=1*60*60, //1 saat
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds,
+                    RefreshTokenUsage=TokenUsage.ReUse
                 },
             };
     }
