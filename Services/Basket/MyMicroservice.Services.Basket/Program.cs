@@ -5,11 +5,17 @@ using Microsoft.Extensions.Options;
 using MyMicroservice.Services.Basket.Services;
 using MyMicroservice.Services.Basket.Settings;
 using MyMicroService.Shared.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //protect
 var requiredAuthorizepolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+
+//bunu eklemessek apiden gelen "sub" key .net tarafýnda name tarzýnda bir ada donusuyor, hata alýrýz
+//JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
 
 // Add services to the container.
 
@@ -27,8 +33,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.Authority = builder.Configuration["IdentityServerURL"];
-    options.Audience = "resource_catalog";
+    options.Audience = "resource_basket";
     options.RequireHttpsMetadata = false;
+
+    //bunu eklemessek apiden gelen "sub" key .net tarafýnda name tarzýnda bir ada donusuyor, hata alýrýz
+    options.MapInboundClaims = false;
 });
 
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
@@ -53,6 +62,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();

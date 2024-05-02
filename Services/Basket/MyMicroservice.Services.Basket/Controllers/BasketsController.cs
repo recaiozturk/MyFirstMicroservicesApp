@@ -33,9 +33,9 @@ namespace MyMicroservice.Services.Basket.Controllers
             return CreateActioNResultInstance(response);
         }
 
-        public async Task<IActionResult> DeleteBasket(BasketDto basketDto)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBasket()
         {
-            var response = await _basketService.SaveOrUpdate(basketDto);
             return CreateActioNResultInstance(await _basketService.Delete(_sharerdIdentityService.GetUserId));
         }
     }
