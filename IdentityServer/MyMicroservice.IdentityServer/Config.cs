@@ -17,6 +17,7 @@ namespace MyMicroservice.IdentityServer
             new ApiResource("resource_catalog"){Scopes={"catalog_fullpermisiion" }},
             new ApiResource("resource_photo_stock"){Scopes={"photo_stock_fullpermisiion" }},
             new ApiResource("resource_basket"){Scopes={"basket_fullpermisiion" }},
+            new ApiResource("resource_discount"){Scopes={"discount_fullpermisiion" }},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -35,6 +36,7 @@ namespace MyMicroservice.IdentityServer
                 new ApiScope("catalog_fullpermisiion","Full access for Catalog API"),
                 new ApiScope("photo_stock_fullpermisiion","Full access for PhotoStock API"),
                 new ApiScope("basket_fullpermisiion","Full access for Basket API"),
+                new ApiScope("discount_fullpermisiion","Full access for Discount API"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -57,7 +59,7 @@ namespace MyMicroservice.IdentityServer
                     ClientId="WebMvcClientForUser",
                     ClientSecrets={new Secret ("secret".Sha256())},
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
-                    AllowedScopes={"basket_fullpermisiion", IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,
+                    AllowedScopes={"basket_fullpermisiion","discount_fullpermisiion", IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,
                      IdentityServerConstants.StandardScopes.Profile,IdentityServerConstants.StandardScopes.OfflineAccess,IdentityServerConstants.LocalApi.ScopeName,"roles"},
                     AllowOfflineAccess=true,
                     AccessTokenLifetime=1*60*60, //1 saat

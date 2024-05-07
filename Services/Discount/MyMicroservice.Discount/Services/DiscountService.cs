@@ -18,7 +18,7 @@ namespace MyMicroservice.Discount.Services
 
         public async Task<Response<NoContent>> Delete(int id)
         {
-            var deleteStatus = await _dbConnection.ExecuteAsync("delete form discount where id=@Id", new { Id = id });
+            var deleteStatus = await _dbConnection.ExecuteAsync("delete from discount where id=@Id", new { Id = id });
 
             return deleteStatus > 0 ? Response<NoContent>.Success(204) : Response<NoContent>.Fail("Discount not found", 404);
         }
