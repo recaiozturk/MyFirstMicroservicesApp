@@ -34,5 +34,7 @@ namespace MyMicroservice.Order.Domain.OrderAggregate
                 _orderItems.Add(newOrderItem);
             }
         }
+
+        public decimal GetTotalPrice=>_orderItems.Sum(x => x.Price);
     }
 }
