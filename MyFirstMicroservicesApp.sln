@@ -36,15 +36,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Discount", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{D52891BE-D5EA-424D-8A75-5A21EA68DBC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Order.API", "Services\Order\MyMicroservice.Order.API\MyMicroservice.Order.API.csproj", "{3D8C44EC-90C8-4FC3-B13F-ACBBC3BCC5A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.API", "Services\Order\MyMicroservice.Order.API\MyMicroservice.Order.API.csproj", "{3D8C44EC-90C8-4FC3-B13F-ACBBC3BCC5A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Order.Application", "Services\Order\MyMicroservice.Order.Application\MyMicroservice.Order.Application.csproj", "{84A9C515-CF03-4A96-9448-A3279D612AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.Application", "Services\Order\MyMicroservice.Order.Application\MyMicroservice.Order.Application.csproj", "{84A9C515-CF03-4A96-9448-A3279D612AC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Order.Domain", "Services\Order\MyMicroservice.Order.Domain\MyMicroservice.Order.Domain.csproj", "{1446A71C-81B7-4A0C-8893-546ADD0E8819}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.Domain", "Services\Order\MyMicroservice.Order.Domain\MyMicroservice.Order.Domain.csproj", "{1446A71C-81B7-4A0C-8893-546ADD0E8819}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Order.Domain.Core", "Services\Order\MyMicroservice.Order.Domain.Core\MyMicroservice.Order.Domain.Core.csproj", "{AED790B4-D8EF-4C7B-97C2-4491F7A91EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.Domain.Core", "Services\Order\MyMicroservice.Order.Domain.Core\MyMicroservice.Order.Domain.Core.csproj", "{AED790B4-D8EF-4C7B-97C2-4491F7A91EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Order.Infrastructure", "Services\Order\MyMicroservice.Order.Infrastructure\MyMicroservice.Order.Infrastructure.csproj", "{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.Infrastructure", "Services\Order\MyMicroservice.Order.Infrastructure\MyMicroservice.Order.Infrastructure.csproj", "{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakePayment", "FakePayment", "{F31527DB-ED61-4ACD-80ED-EF785E5E2AA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Services.FakePayment", "Services\FakePayment\MyMicroservice.Services.FakePayment\MyMicroservice.Services.FakePayment.csproj", "{386A3353-A90C-4739-9E9E-505BAA3227CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +100,10 @@ Global
 		{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +125,8 @@ Global
 		{1446A71C-81B7-4A0C-8893-546ADD0E8819} = {D52891BE-D5EA-424D-8A75-5A21EA68DBC6}
 		{AED790B4-D8EF-4C7B-97C2-4491F7A91EA7} = {D52891BE-D5EA-424D-8A75-5A21EA68DBC6}
 		{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1} = {D52891BE-D5EA-424D-8A75-5A21EA68DBC6}
+		{F31527DB-ED61-4ACD-80ED-EF785E5E2AA4} = {99F22889-0E8A-4CB0-96A8-1E6630D3370C}
+		{386A3353-A90C-4739-9E9E-505BAA3227CD} = {F31527DB-ED61-4ACD-80ED-EF785E5E2AA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6D58758-6050-4C4D-8CE9-431C4DD48620}

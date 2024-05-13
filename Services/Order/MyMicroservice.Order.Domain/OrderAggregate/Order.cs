@@ -16,6 +16,10 @@ namespace MyMicroservice.Order.Domain.OrderAggregate
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
 
+        public Order()
+        {
+            
+        }
         public Order(string buyerId,Address address)
         {
             _orderItems= new List<OrderItem>();
@@ -28,7 +32,7 @@ namespace MyMicroservice.Order.Domain.OrderAggregate
         {
             var existProduct = _orderItems.Any(x => x.ProductId == productId);
 
-            if(existProduct)
+            if(!existProduct)
             {
                 var newOrderItem = new OrderItem(productId, productName, pictureUrl, price);
                 _orderItems.Add(newOrderItem);
