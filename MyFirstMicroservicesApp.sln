@@ -48,7 +48,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Order.Infras
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakePayment", "FakePayment", "{F31527DB-ED61-4ACD-80ED-EF785E5E2AA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Services.FakePayment", "Services\FakePayment\MyMicroservice.Services.FakePayment\MyMicroservice.Services.FakePayment.csproj", "{386A3353-A90C-4739-9E9E-505BAA3227CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMicroservice.Services.FakePayment", "Services\FakePayment\MyMicroservice.Services.FakePayment\MyMicroservice.Services.FakePayment.csproj", "{386A3353-A90C-4739-9E9E-505BAA3227CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{E558AD61-1D1A-40F1-9EA8-525B766953E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMicroservice.Gateway", "MyMicroservice.Gateway\MyMicroservice.Gateway.csproj", "{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +108,10 @@ Global
 		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{386A3353-A90C-4739-9E9E-505BAA3227CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +135,7 @@ Global
 		{D4AE6A1A-9991-4D25-8A8F-C9A45C4330C1} = {D52891BE-D5EA-424D-8A75-5A21EA68DBC6}
 		{F31527DB-ED61-4ACD-80ED-EF785E5E2AA4} = {99F22889-0E8A-4CB0-96A8-1E6630D3370C}
 		{386A3353-A90C-4739-9E9E-505BAA3227CD} = {F31527DB-ED61-4ACD-80ED-EF785E5E2AA4}
+		{F8BFA2A8-1576-4F7C-A726-888A1A4AF1EB} = {E558AD61-1D1A-40F1-9EA8-525B766953E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6D58758-6050-4C4D-8CE9-431C4DD48620}

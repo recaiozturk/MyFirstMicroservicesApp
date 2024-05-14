@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using MyMicroService.Services.Catalog.DTOs;
+using MyMicroService.Services.Catalog.Models;
 using MyMicroService.Services.Catalog.Services;
 using MyMicroService.Services.Catalog.Settings;
 
@@ -38,8 +41,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     options.Audience = "resource_catalog";
     options.RequireHttpsMetadata = false;
 });
-
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+
+    if (!categoryService.GetAllAsync().Result.Data.Any())
+    {
+        categoryService.CreateAsync( new CategoryDto { Name="Asp .Net Kursu"}).Wait();
+        categoryService.CreateAsync(new CategoryDto { Name = "Asp .Net Core Kursu " }).Wait();
+
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
