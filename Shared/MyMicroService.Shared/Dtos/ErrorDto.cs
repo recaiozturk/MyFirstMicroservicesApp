@@ -6,6 +6,6 @@ namespace MyMicroService.Shared.Dtos
 {
     public class ErrorDto
     {
-        public List<string> Errors { get; set; }
+        public List<string> errors { get; set; }
     }
 }

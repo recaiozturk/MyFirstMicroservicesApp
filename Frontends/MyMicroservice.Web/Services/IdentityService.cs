@@ -29,22 +29,93 @@ namespace MyMicroservice.Web.Services
             _serviceApiSettings = serviceApiSettings.Value;
         }
 
-        public Task<TokenResponse> GetAccessTokenByRefreshtoken()
+        public async Task<TokenResponse> GetAccessTokenByRefreshtoken()
         {
-            throw new NotImplementedException();
+            var disco = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.BaseUri,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+
+            if (disco.IsError)
+            {
+                throw disco.Exception;
+            }
+
+            //cookieden refresh token alıyoruz
+            var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            RefreshTokenRequest refreshTokenRequest = new()
+            {
+                ClientId = _clientSettings.WebClientForUser.ClientId,
+                ClientSecret = _clientSettings.WebClientForUser.ClientSecret,
+                RefreshToken = refreshToken,
+                Address = disco.TokenEndpoint
+            };
+
+            var token = await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
+
+            if (token.IsError)
+                return null;
+
+
+
+            var authonticationTokens = new List<AuthenticationToken>()
+            {
+                new AuthenticationToken{Name=OpenIdConnectParameterNames.AccessToken,Value=token.AccessToken},
+                new AuthenticationToken{Name=OpenIdConnectParameterNames.RefreshToken,Value=token.RefreshToken},
+
+                //herhangi bir kulture baglı kalmdan token süresi belirtiyoruz
+                new AuthenticationToken{Name=OpenIdConnectParameterNames.ExpiresIn,Value=
+                    DateTime.Now.AddSeconds(token.ExpiresIn).ToString("o",CultureInfo.InvariantCulture)}
+            };
+
+            var authonticationResult = await _httpContextAccessor.HttpContext.AuthenticateAsync();
+
+            var properties = authonticationResult.Properties;
+            properties.StoreTokens(authonticationTokens);
+
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                authonticationResult.Principal, properties);
+
+            return token;
+
+
         }
 
-        public Task RevokeRefreshtoken()
+        public async Task RevokeRefreshtoken()
         {
-            throw new NotImplementedException();
+            var disco = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = _serviceApiSettings.BaseUri,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
+            });
+
+            if (disco.IsError)
+            {
+                throw disco.Exception;
+            }
+
+            var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            TokenRevocationRequest tokenRecovationRequest = new()
+            {
+                ClientId = _clientSettings.WebClientForUser.ClientId,
+                ClientSecret = _clientSettings.WebClientForUser.ClientSecret,
+                Address = disco.TokenEndpoint,
+                Token = refreshToken,
+                TokenTypeHint = "refresh_token"
+            };
+
+            await _httpClient.RevokeTokenAsync(tokenRecovationRequest);
         }
 
         public async Task<Response<bool>> SignIn(SignInInput signInInput)
         {
             var disco = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
-                Address=_serviceApiSettings.BaseUri,
-                Policy=new DiscoveryPolicy { RequireHttps=false}
+                Address = _serviceApiSettings.BaseUri,
+                Policy = new DiscoveryPolicy { RequireHttps = false }
             });
 
             if (disco.IsError)
@@ -61,15 +132,15 @@ namespace MyMicroservice.Web.Services
                 Address = disco.TokenEndpoint
             };
 
-            var token=await _httpClient.RequestPasswordTokenAsync(passwordTokenRequest);
+            var token = await _httpClient.RequestPasswordTokenAsync(passwordTokenRequest);
 
-            if(token.IsError)
+            if (token.IsError)
             {
-                var responseContent=await token.HttpResponse.Content.ReadAsStringAsync();
+                var responseContent = await token.HttpResponse.Content.ReadAsStringAsync();
 
                 var errorDto = JsonSerializer.Deserialize<ErrorDto>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = false });
 
-                return Response<bool>.Fail(errorDto.Errors, 400);
+                return Response<bool>.Fail(errorDto.errors, 400);
             }
 
             var userInfoRequest = new UserInfoRequest
@@ -78,9 +149,9 @@ namespace MyMicroservice.Web.Services
                 Address = disco.UserInfoEndpoint
             };
 
-            var userInfo=await _httpClient.GetUserInfoAsync(userInfoRequest);
+            var userInfo = await _httpClient.GetUserInfoAsync(userInfoRequest);
 
-            if(userInfo.IsError)
+            if (userInfo.IsError)
             {
                 throw userInfo.Exception;
             }
@@ -89,7 +160,7 @@ namespace MyMicroservice.Web.Services
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(userInfo.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
 
             //cookie olusturma prensibi
-            ClaimsPrincipal claimsPrincipal=new ClaimsPrincipal(claimsIdentity);
+            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
             var authonticationProperties = new AuthenticationProperties();
 
