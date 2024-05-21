@@ -14,7 +14,7 @@ namespace MyMicroservice.Web.Services
 
         public async Task<UserViewModel> GetUser()
         {
-            return await _httpClient.GetFromJsonAsync<UserViewModel>("api/user/getuser"); 
+            return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser"); 
         }
     }
 }

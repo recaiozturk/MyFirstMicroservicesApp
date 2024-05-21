@@ -47,6 +47,8 @@ namespace MyMicroservice.IdentityServer.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetUser()
+        
+        
         {
             var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
 
