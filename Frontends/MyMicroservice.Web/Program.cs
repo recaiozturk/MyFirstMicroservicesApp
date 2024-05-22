@@ -3,6 +3,7 @@ using MyMicroservice.Web.Handlers;
 using MyMicroservice.Web.Models;
 using MyMicroservice.Web.Services;
 using MyMicroservice.Web.Services.Interfaces;
+using MyMicroService.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ var serviceApiSettings=builder.Configuration.GetSection("ServiceApiSettings").Ge
 
 builder.Services.AddHttpClient<IIdentityService,IdentityService>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ISharerdIdentityService,ISharerdIdentityService>();
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
