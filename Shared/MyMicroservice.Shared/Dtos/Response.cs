@@ -7,14 +7,14 @@ namespace MyMicroservice.Shared.Dtos
 {
     public class Response<T>
     {
-        public T Data { get; private set; }
+        public T Data { get;  set; }
 
         //json ignore ile cliente status code gösttermeye gerek yok,zaten code olusuyor,sadece biz kullancaz
         [JsonIgnore]
-        public int StatusCode { get; private set; }
+        public int StatusCode { get;  set; }
 
         [JsonIgnore]
-        public bool IsSuccesful { get; private set; }
+        public bool IsSuccesful { get;  set; }
 
         public List<string> Errors { get; set; }
 

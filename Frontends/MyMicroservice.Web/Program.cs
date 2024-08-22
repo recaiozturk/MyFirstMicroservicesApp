@@ -17,12 +17,15 @@ var serviceApiSettings=builder.Configuration.GetSection("ServiceApiSettings").Ge
 
 builder.Services.AddHttpClient<IIdentityService,IdentityService>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
-builder.Services.AddScoped<ISharerdIdentityService,ISharerdIdentityService>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+builder.Services.AddAccessTokenManagement();
+
+builder.Services.AddScoped<ISharerdIdentityService, SharedIdentityService>();
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 
-
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
@@ -32,7 +35,7 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(opt =>
 {
     opt.BaseAddress = new Uri($"{serviceApiSettings.GatawayBaseUri}/{serviceApiSettings.Catalog.Path}");
-});
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 //cookie settings
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opts =>
